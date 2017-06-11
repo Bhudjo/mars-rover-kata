@@ -6,7 +6,7 @@ import org.scalatest._
 /**
   * Created by abuggin on 11/06/17.
   */
-class PositionSpec extends WordSpec {
+class RoverSpec extends WordSpec {
 
   val emptyCommand: String = ""
 
@@ -17,13 +17,12 @@ class PositionSpec extends WordSpec {
         assert(boredRover.receiveDirective(emptyCommand) == boredRover.initialPosition)
       }
     }
-  }
-  it should{
-    "fail to instantiate with illegal params" in {
-      assertThrows[IllegalStateException]{
-        val aimlessRover = Rover((0,0), 'c')
+    "receives an illegal direction" should {
+      "fail to instantiate" in {
+        assertThrows[IllegalStateException] {
+          val aimlessRover = Rover((0, 0), 'c')
+        }
       }
     }
   }
-
 }

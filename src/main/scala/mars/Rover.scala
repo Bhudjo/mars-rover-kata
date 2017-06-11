@@ -7,5 +7,5 @@ package mars
 case class Rover(initialPosition: (Int, Int), direction: Char) {
   require(Direction.isValid(direction.toString))
 
-  def receiveDirective(EmptyPosition: String) = initialPosition
+  def receiveDirective(command: String) = initialPosition
 }
