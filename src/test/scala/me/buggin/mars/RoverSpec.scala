@@ -24,5 +24,12 @@ class RoverSpec extends WordSpec {
         }
       }
     }
+    "receives an illegal command" should {
+      "throw an error and stay in the same position" in {
+        assertThrows[IllegalArgumentException] {
+          Rover((0, 0), 'W') receiveDirective "qwerty"
+        }
+      }
+    }
   }
 }
