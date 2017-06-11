@@ -3,7 +3,7 @@ package mars
 /**
   * Created by abuggin on 11/06/17.
   */
-object Command extends Enumeration{
+object Command extends Enumeration {
   type Command = Value
   val f, b, l, r = Value
 
