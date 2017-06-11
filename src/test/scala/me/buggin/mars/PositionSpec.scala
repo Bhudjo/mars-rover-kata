@@ -8,12 +8,13 @@ import org.scalatest._
   */
 class PositionSpec extends WordSpec {
 
-  val EmptyPosition: Any = ""
+  val emptyCommand: String = ""
 
   "A Rover" when {
-    "receives an empty instruction array" should {
-      "give back default position" in {
-        assert(Rover.receivePosition(EmptyPosition) == Rover.defaultPosition)
+    "receives an empty instruction string" should {
+      "still be in the initial position" in {
+        val boredRover = Rover(0, 0)
+        assert(boredRover.receiveDirective(emptyCommand) == boredRover.initialPosition)
       }
     }
   }
