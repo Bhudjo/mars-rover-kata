@@ -30,5 +30,11 @@ class RoverSpec extends WordSpec {
         }
       }
     }
+    "receives a forward command" should {
+      "move forward in its direction" in {
+        val stillValidRover = validRover receiveDirective "f"
+        assert(stillValidRover == Rover((0, -1), 'W'))
+      }
+    }
   }
 }
