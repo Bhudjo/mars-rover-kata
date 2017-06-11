@@ -18,4 +18,12 @@ class PositionSpec extends WordSpec {
       }
     }
   }
+  it should{
+    "fail to instantiate with illegal params" in {
+      assertThrows[IllegalStateException]{
+        val aimlessRover = Rover((0,0), 'c')
+      }
+    }
+  }
+
 }
