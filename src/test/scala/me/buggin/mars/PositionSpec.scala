@@ -13,7 +13,7 @@ class PositionSpec extends WordSpec {
   "A Rover" when {
     "receives an empty instruction string" should {
       "still be in the initial position" in {
-        val boredRover = Rover(0, 0)
+        val boredRover = Rover((0, 0), 'W')
         assert(boredRover.receiveDirective(emptyCommand) == boredRover.initialPosition)
       }
     }
