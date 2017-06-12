@@ -9,6 +9,7 @@ case class Rover(position: (Int, Int), direction: Char) {
 
   def receiveDirective(command: String): Rover = {
     require(Command.isValid(command))
-    Rover((0,-1),direction)
+    if (command == "") this
+    else Rover((0, -1), direction)
   }
 }
