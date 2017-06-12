@@ -1,6 +1,5 @@
 package me.buggin.mars
 
-import mars.Rover
 import org.scalatest._
 
 /**
@@ -9,7 +8,7 @@ import org.scalatest._
 class RoverSpec extends WordSpec {
 
   "A Rover" when {
-    val validRover = Rover((0, 0), 'W')
+    val validRover = Rover(Position(0, 0), 'W')
     "receives an empty instruction string" should {
       "still be in the initial position" in {
         val boredRover = validRover
@@ -19,7 +18,7 @@ class RoverSpec extends WordSpec {
     "is created with an illegal direction" should {
       "fail to instantiate" in {
         assertThrows[IllegalStateException] {
-          val aimlessRover = Rover((0, 0), 'c')
+          val aimlessRover = Rover(Position(0, 0), 'c')
         }
       }
     }
@@ -33,7 +32,7 @@ class RoverSpec extends WordSpec {
     "receives a forward command" should {
       "move forward in its direction" in {
         val stillValidRover = validRover receiveDirective "f"
-        assert(stillValidRover == Rover((0, -1), 'W'))
+        assert(stillValidRover == Rover(Position(0, -1), 'W'))
       }
       "still have the same direction" in {
         val stillValidRover = validRover receiveDirective "f"
@@ -43,7 +42,7 @@ class RoverSpec extends WordSpec {
     "receives a backward command" should {
       "move backward in its direction" in {
         val stillValidRover = validRover receiveDirective "b"
-        assert(stillValidRover == Rover((0, 1), 'W'))
+        assert(stillValidRover == Rover(Position(0, 1), 'W'))
       }
     }
   }

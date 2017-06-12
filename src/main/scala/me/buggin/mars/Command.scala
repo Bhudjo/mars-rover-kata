@@ -1,4 +1,4 @@
-package mars
+package me.buggin.mars
 
 /**
   * Created by abuggin on 11/06/17.
