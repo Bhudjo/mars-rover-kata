@@ -35,6 +35,10 @@ class RoverSpec extends WordSpec {
         val stillValidRover = validRover receiveDirective "f"
         assert(stillValidRover == Rover((0, -1), 'W'))
       }
+      "still have the same direction" in {
+        val stillValidRover = validRover receiveDirective "f"
+        assert(stillValidRover.direction == validRover.direction)
+      }
     }
   }
 }
