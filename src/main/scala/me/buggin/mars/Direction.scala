@@ -5,8 +5,7 @@ package me.buggin.mars
   */
 object Direction extends Enumeration {
   def getDirection(direction: Char): Direction = {
-    Direction
-      .values
+    Direction.values
       .find(_.toString == direction.toString)
       .getOrElse(throw new IllegalStateException("Direction should be one of [N,S,W,E]"))
   }
