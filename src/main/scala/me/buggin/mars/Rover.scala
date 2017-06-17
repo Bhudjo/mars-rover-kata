@@ -1,12 +1,17 @@
 package me.buggin.mars
 
+import me.buggin.mars.Direction.Direction
+
 /**
   * Created by abuggin on 11/06/17.
   */
 
-case class Rover(position: Position, direction: Char) {
-  require(Direction.isValid(direction.toString))
+object RoverFactory {
+  def createARover(p: (Int, Int), direction: Char): Rover =
+    Rover(Position(p._1, p._2), Direction.getDirection(direction))
+}
 
+case class Rover(position: Position, direction: Direction) {
   def receiveDirective(command: String): Rover = {
     require(Command.isValid(command))
     if (command == "") this
