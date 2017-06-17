@@ -66,4 +66,12 @@ class RoverSpec extends WordSpec {
       }
     }
   }
+  "Turning: A Rover" when {
+    "is facing West and receives a left command" should {
+      "turn up to face South" in {
+        val turningRover = validRover receiveDirective "l"
+        assert(turningRover.direction == Direction.S)
+      }
+    }
+  }
 }
