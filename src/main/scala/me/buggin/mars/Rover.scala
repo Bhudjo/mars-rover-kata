@@ -13,6 +13,10 @@ object RoverFactory {
 
 case class Rover(position: Position, direction: Direction) {
   def receiveDirective(command: String): Rover = {
+    command.foldLeft(this)((rover, step)=> rover.singleStep(step.toString))
+  }
+
+  private def singleStep(command: String): Rover = {
     require(Command.isValid(command))
     if (command == "") this
     else if (command == "b") Rover(Position(0, 1), direction)
