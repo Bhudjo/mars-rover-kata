@@ -86,4 +86,12 @@ class RoverSpec extends WordSpec {
       }
     }
   }
+  "Cruising: A Rover" when {
+    "receives a mix of move and turn commands" should {
+      "move accordingly" in {
+        val cruisingRover = validRover receiveDirective "fffrfff"
+        assert(cruisingRover == RoverFactory.createARover((-3,3),'N'))
+      }
+    }
+  }
 }
