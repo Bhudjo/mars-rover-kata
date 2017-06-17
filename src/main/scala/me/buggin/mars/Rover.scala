@@ -7,8 +7,8 @@ import me.buggin.mars.Direction.Direction
   */
 
 object RoverFactory {
-  def createARover(p: (Int, Int), c: Char): Rover =
-    Rover(Position(p._1, p._2), Direction.getDirectionFromChar(c))
+  def buildRover(position: (Int, Int), direction: Char): Rover =
+    Rover(Position(position._1, position._2), Direction.getDirectionFromChar(direction))
 }
 
 case class Rover(position: Position, direction: Direction) {
@@ -16,34 +16,44 @@ case class Rover(position: Position, direction: Direction) {
     command.foldLeft(this)((rover, step) => rover.singleStep(step.toString))
   }
 
-
   private def singleStep(command: String): Rover = {
     require(Command.isValid(command))
-
-    def goBackward: _root_.me.buggin.mars.Rover = {
-      val newPosition = direction match {
-        case Direction.N => Position(position.x, position.y-1)
-        case Direction.S => Position(position.x, position.y +1)
-        case Direction.E => Position(position.x-1, position.y)
-        case Direction.W => Position(position.x+1, position.y)
-      }
-      Rover(newPosition, direction)
-    }
-
-    def moveForward: Rover = {
-      val newPosition = direction match {
-        case Direction.N => Position(position.x, position.y +1)//increaseY
-        case Direction.S => Position(position.x, position.y -1)//decreaseY
-        case Direction.E => Position(position.x+1, position.y)//increaseX
-        case Direction.W => Position(position.x-1, position.y)//decreaseX
-      }
-      Rover(newPosition, direction)
-    }
-
     if (command == "") this
-    else if (command == "b") goBackward
-    else if (command == "f") moveForward
-    else if (command == "r") Rover(position, Direction.turnRight(direction))
-    else Rover(position, Direction.turnLeft(direction))
+    else {
+      Command.withName(command) match {
+        case Command.f => moveForward
+        case Command.b => moveBackward
+        case Command.l => turnLeft
+        case Command.r => turnRight
+      }
+    }
+  }
+
+  private def moveForward: Rover = {
+    val newPosition = direction match {
+      case Direction.N => position.increaseY
+      case Direction.S => position.decreaseY
+      case Direction.E => position.increaseX
+      case Direction.W => position.decreaseX
+    }
+    Rover(newPosition, direction)
+  }
+
+  private def moveBackward: Rover = {
+    val newPosition = direction match {
+      case Direction.N => position.decreaseY
+      case Direction.S => position.increaseY
+      case Direction.E => position.decreaseX
+      case Direction.W => position.increaseX
+    }
+    Rover(newPosition, direction)
+  }
+
+  private def turnRight = {
+    Rover(position, Direction.turnRight(direction))
+  }
+
+  private def turnLeft = {
+    Rover(position, Direction.turnLeft(direction))
   }
 }

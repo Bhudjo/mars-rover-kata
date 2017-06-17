@@ -6,7 +6,7 @@ import org.scalatest._
   * Created by abuggin on 11/06/17.
   */
 class RoverSpec extends WordSpec {
-  val validRover = RoverFactory.createARover((0, 0), 'W')
+  val validRover = RoverFactory.buildRover((0, 0), 'W')
 
   "Init: A Rover" when {
     "receives an empty instruction string" should {
@@ -18,7 +18,7 @@ class RoverSpec extends WordSpec {
     "is created with an illegal direction" should {
       "fail to instantiate" in {
         assertThrows[IllegalStateException] {
-          val aimlessRover = RoverFactory.createARover((0, 0), 'c')
+          val aimlessRover = RoverFactory.buildRover((0, 0), 'c')
         }
       }
     }
@@ -34,7 +34,7 @@ class RoverSpec extends WordSpec {
     "receives a forward command" should {
       "move forward in its direction" in {
         val stillValidRover = validRover receiveDirective "f"
-        assert(stillValidRover == RoverFactory.createARover((-1, 0), 'W'))
+        assert(stillValidRover == RoverFactory.buildRover((-1, 0), 'W'))
       }
       "still have the same direction" in {
         val stillValidRover = validRover receiveDirective "f"
@@ -44,25 +44,25 @@ class RoverSpec extends WordSpec {
     "receives a backward command" should {
       "move backward in its direction" in {
         val stillValidRover = validRover receiveDirective "b"
-        assert(stillValidRover == RoverFactory.createARover((1, 0), 'W'))
+        assert(stillValidRover == RoverFactory.buildRover((1, 0), 'W'))
       }
     }
     "receives two forward commands" should {
       "move two steps forward" in {
         val babyStepsRover = validRover receiveDirective "ff"
-        assert(babyStepsRover == RoverFactory.createARover((-2, 0), 'W'))
+        assert(babyStepsRover == RoverFactory.buildRover((-2, 0), 'W'))
       }
     }
     "receives three forward commands" should {
       "move three steps forward" in {
         val babyStepsRover = validRover receiveDirective "fff"
-        assert(babyStepsRover == RoverFactory.createARover((-3, 0), 'W'))
+        assert(babyStepsRover == RoverFactory.buildRover((-3, 0), 'W'))
       }
     }
     "receives a mix of forward and backward commands" should {
       "move three steps forward" in {
         val babyStepsRover = validRover receiveDirective "fffbbb"
-        assert(babyStepsRover == RoverFactory.createARover((0, 0), 'W'))
+        assert(babyStepsRover == RoverFactory.buildRover((0, 0), 'W'))
       }
     }
   }
@@ -90,7 +90,7 @@ class RoverSpec extends WordSpec {
     "receives a mix of move and turn commands" should {
       "move accordingly" in {
         val cruisingRover = validRover receiveDirective "fffrfff"
-        assert(cruisingRover == RoverFactory.createARover((-3, 3), 'N'))
+        assert(cruisingRover == RoverFactory.buildRover((-3, 3), 'N'))
         val comingBackRover = cruisingRover receiveDirective "rfffrfffr"
         assert(comingBackRover == validRover)
       }
