@@ -19,7 +19,7 @@ case class Rover(position: Position, direction: Direction) {
   private def singleStep(command: String): Rover = {
     require(Command.isValid(command))
     if (command == "") this
-    else if (command == "b") Rover(Position(0, 1), direction)
-    else Rover(Position(0, -1), direction)
+    else if (command == "b") RoverFactory.createARover((position.x,position.y+1), direction.toString.charAt(0))
+    else RoverFactory.createARover((position.x,position.y-1), direction.toString.charAt(0))
   }
 }
