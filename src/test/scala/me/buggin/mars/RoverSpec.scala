@@ -96,4 +96,14 @@ class RoverSpec extends WordSpec {
       }
     }
   }
+  "Circumnavigating Rover" when {
+    "crosses the north pole going straight" should {
+      "get back a reduced value at the other point of the world" in {
+        val circumnavigatingRover = RoverFactory.buildRover((5,80), 'N')
+        val circumnavigatedRover = circumnavigatingRover receiveDirective "f" * 20
+        println(circumnavigatedRover)
+        assert(circumnavigatedRover == RoverFactory.buildRover((-175, 80),'S'))
+      }
+    }
+  }
 }
