@@ -59,5 +59,11 @@ class RoverSpec extends WordSpec {
         assert(babyStepsRover == RoverFactory.createARover((0,-3),'W'))
       }
     }
+    "receives a mix of forward and backward commands" should {
+      "move three steps forward" in {
+        val babyStepsRover = validRover receiveDirective "fffbbb"
+        assert(babyStepsRover == RoverFactory.createARover((0,0),'W'))
+      }
+    }
   }
 }
