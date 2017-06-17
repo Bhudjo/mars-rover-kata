@@ -6,9 +6,9 @@ import org.scalatest._
   * Created by abuggin on 11/06/17.
   */
 class RoverSpec extends WordSpec {
+  val validRover = RoverFactory.createARover((0, 0), 'W')
 
-  "A Rover" when {
-    val validRover = RoverFactory.createARover((0, 0), 'W')
+  "Init: A Rover" when {
     "receives an empty instruction string" should {
       "still be in the initial position" in {
         val boredRover = validRover
@@ -29,6 +29,8 @@ class RoverSpec extends WordSpec {
         }
       }
     }
+  }
+  "Moving: A Rover" when {
     "receives a forward command" should {
       "move forward in its direction" in {
         val stillValidRover = validRover receiveDirective "f"
@@ -43,6 +45,12 @@ class RoverSpec extends WordSpec {
       "move backward in its direction" in {
         val stillValidRover = validRover receiveDirective "b"
         assert(stillValidRover == RoverFactory.createARover((0, 1), 'W'))
+      }
+    }
+    "receives two forward commands" should {
+      "move two steps forward" in {
+        val babyStepsRover = validRover receiveDirective "ff"
+        assert(babyStepsRover == RoverFactory.createARover((0,-2),'W'))
       }
     }
   }
