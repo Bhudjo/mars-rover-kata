@@ -14,4 +14,17 @@ object Direction extends Enumeration {
   type Direction = Value
   val N, S, W, E = Value
 
+  def turnLeft(direction: Direction): Direction = direction match {
+    case N => W
+    case W => S
+    case S => E
+    case E => N
+  }
+
+  def turnRight(direction: Direction): Direction = direction match {
+    case N => E
+    case E => S
+    case S => W
+    case W => N
+  }
 }
